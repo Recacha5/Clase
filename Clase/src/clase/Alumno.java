@@ -28,6 +28,8 @@ public class Alumno {
         
     }
 
+    
+    
     /**
      * @return the nombre
      */
@@ -62,9 +64,9 @@ public class Alumno {
         mod = sc.nextLine();
         System.out.println("Dime la nota");
         nota = sc.nextDouble();
-        for (int i = 0; i < vNotas.size(); i++) {
-            if (nombre.equalsIgnoreCase(nom) && vNotas.get(i).getModulo().equalsIgnoreCase(mod)) {
-                vNotas.get(i).setCalificacion(nota);
+        for (int i = 0; i < getvNotas().size(); i++) {
+            if (nombre.equalsIgnoreCase(nom) && getvNotas().get(i).getModulo().equalsIgnoreCase(mod)) {
+                getvNotas().get(i).setCalificacion(nota);
             }
         }
     }
@@ -73,7 +75,7 @@ public class Alumno {
      */
     public void obtenerMejorNota() {
         double mayor = 0;
-        for (Nota n : vNotas) {
+        for (Nota n : getvNotas()) {
             if (n != null && n.getCalificacion() > mayor) {
                 mayor = n.getCalificacion();
             }
@@ -91,12 +93,26 @@ public class Alumno {
         System.out.println("Sobre qué modulo quieres saber la nota");
         mod = sc.nextLine();
 
-        for (Nota n : vNotas) {
+        for (Nota n : getvNotas()) {
             if (n != null && nombre.equalsIgnoreCase(nom) && n.getModulo().equalsIgnoreCase(mod)) {
                 System.out.println(n.getCalificacion());
             }
         }
 
+    }
+
+    /**
+     * @return the vNotas
+     */
+    public ArrayList<Nota> getvNotas() {
+        return vNotas;
+    }
+
+    /**
+     * @param vNotas the vNotas to set
+     */
+    public void setvNotas(ArrayList<Nota> vNotas) {
+        this.vNotas = vNotas;
     }
 
 }

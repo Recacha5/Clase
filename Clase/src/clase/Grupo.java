@@ -16,50 +16,43 @@ public class Grupo {
 
     private ArrayList<Alumno> vAlumnos;
 
-    /**
-     *
-     */
     public Grupo() {
         this.vAlumnos = new ArrayList();
     }
 
     /**
-     * Descripcion
-     *
-     * @param nombreAlumno
-     * @param modulos
+     * Matricula un alumno
+     * @param nombreAlumno recibe un nombre
+     * @param modulos recibe un Array de Nota con los modulos
      */
     public void matricularAlumno(String nombreAlumno, ArrayList<Nota> modulos) {
         Alumno a = new Alumno(nombreAlumno, modulos);
 
-        for (int i = 0; i < vAlumnos.size(); i++) {
-
-            if (vAlumnos.isEmpty()) {
-                vAlumnos.add(a);
-            }
-
-        }
+        vAlumnos.add(a);
 
     }
     /**
-     * 
+     * Modifica la calificacion.
      */
     public void ponerNota(){
         Scanner sc = new Scanner(System.in);
         String nom, mod;
+        double nota;
         System.out.println("A quién le quieres poner nota?");
         nom = sc.nextLine();
         System.out.println("En qué modulo");
         mod = sc.nextLine();
+        System.out.println("Dime la nota");
+        nota = sc.nextDouble();
 
         for (int i = 0; i < vAlumnos.size(); i++) {
-            if (vAlumnos.isEmpty() && vAlumnos.equals(nom) && vAlumnos.contains(mod)) {
-                
+            if (vAlumnos.get(i).getNombre().equalsIgnoreCase(nom) && vAlumnos.get(i).getvNotas().get(i).getModulo().equalsIgnoreCase(mod)) {
+                vAlumnos.get(i).getvNotas().get(i).setCalificacion(nota);
             }
         }
     }
     /**
-     * 
+     * Borra un alumno
      */
     public void borrarAlumno(){
         Scanner sc = new Scanner(System.in);
@@ -68,13 +61,13 @@ public class Grupo {
         nom = sc.nextLine();
         
         for (int i = 0; i < vAlumnos.size(); i++) {
-            if (!vAlumnos.isEmpty() && vAlumnos.equals(nom)) {
+            if (vAlumnos.get(i).getNombre().equalsIgnoreCase(nom)) {
                 vAlumnos.remove(i);
             }
         }
     }
     /**
-     * 
+     * Borra el grupo
      */
     public void borrarGrupo(){
         
@@ -83,35 +76,43 @@ public class Grupo {
     }
     /**
      * 
+     * @return devuelve el numero de suspensos
      */
-    public void numeroDeSuspensos(){
+    public int numeroDeSuspensos(){
         int aux=0;
         for (int i = 0; i < vAlumnos.size(); i++) {
-            
-            if (!vAlumnos.isEmpty()) {
+            for (int j = 0; j < vAlumnos.size(); j++) {
+                if(vAlumnos.get(i).getvNotas().get(j).getCalificacion() < 4);
                 aux++;
             }
-            
+
         }
-        System.out.println(aux);
+        return aux;
     }
     /**
      * 
+     * @return devuelve la mejor nota
      */
-    public void obtenerMejorNota(){
-        
-        
-        
+    public double obtenerMejorNota(){
+        double aux=0;
+        for (int i = 0; i < vAlumnos.size(); i++) {
+            for (int j = 0; j < vAlumnos.size(); j++) {
+                if(vAlumnos.get(i).getvNotas().get(j).getCalificacion() > aux);
+                aux = vAlumnos.get(i).getvNotas().get(j).getCalificacion();
+            }
+
+        }
+        return aux;
     }
     /**
-     * 
-     * @param alumno 
+     * Comprueba si un alumno está matriculado
+     * @param alumno recibe un nombre
      */
-    public void alumnoMatriculado(Alumno alumno){
+    public void alumnoMatriculado(String alumno){
         
         for (int i = 0; i < vAlumnos.size(); i++) {
             
-            if (!vAlumnos.isEmpty() && vAlumnos.contains(alumno)) {
+            if (vAlumnos.get(i).getNombre().equalsIgnoreCase(alumno)) {
                 System.out.println("Está matriculado");
             }else{
                 System.out.println("No está matriculado");
