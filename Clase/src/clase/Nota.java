@@ -23,6 +23,7 @@ public class Nota {
         this.calificacion = 0;
     }
 
+    
     /**
      * @return the modulo
      */

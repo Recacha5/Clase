@@ -24,10 +24,15 @@ public class Alumno {
      */
     public Alumno(String nombre, ArrayList<Nota> modulos) {
         this.nombre = nombre;
-        this.vNotas = new ArrayList();
+        this.vNotas = modulos;
         
     }
 
+    public Alumno(String nombre) {
+        this.nombre = nombre;
+    }
+
+   
     
     
     /**
